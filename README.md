@@ -89,10 +89,12 @@ This alternative does not perform frozen-reference parity checks.
 | `run_release.py` | Complete reproducible workflow |
 | `make_report.py` | Report generation from computed outputs |
 
-[STEP_BY_STEP.md](STEP_BY_STEP.md) explains the code. [SOURCE_AND_PROTOCOL.md](SOURCE_AND_PROTOCOL.md) describes confirmed source definitions and pending clinical decisions. Included JSON, charts and aggregate CSV files document the original run; `verification.json` records that run's checks, not checks on a newly supplied dataset.
+[STEP_BY_STEP.md](STEP_BY_STEP.md) explains the code. 
 
 ## Outcome and scope
 
+Data source and cleaning: The dataset contains routine-care Moorfields DME records, with visual acuity recorded in ETDRS letters and follow-up days measured from the first recorded injection. Each eligible eye requires a unique day-zero injection visit and valid baseline measurements. Invalid VA scores outside 0–100 are treated as missing. Conflicting measurements on the selected follow-up day lead to exclusion. The first recorded injection does not confirm that the patient had never received treatment elsewhere, and routine VA should not be described as standardized BCVA.
+
 Follow-up is the valid VA measurement nearest day 180 within days 150–210, with earlier-day tie breaking. Response means follow-up VA minus baseline VA is at least 5 letters. Eyes without eligible follow-up remain unlabeled. Features contain no follow-up measurements or future injection counts.
 
-The source cohort was restricted to eyes receiving at least three injections, which limits generalization to all treatment starters. Clinical signoff on the proposed endpoint remains pending. The CSV contains no OCT thickness measurement, so an anatomical response model is not implemented. Multimodal comparisons require verified linkage and evaluation on the same patients.
+
