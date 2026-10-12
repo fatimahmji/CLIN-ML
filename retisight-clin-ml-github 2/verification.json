@@ -1,7 +1,0 @@
-{
-  "reference_label_and_partition_parity": true,
-  "reference_test_probability_parity": true,
-  "source_followup_selection": true,
-  "export_reload": true,
-  "inference_boundaries": true
-}
