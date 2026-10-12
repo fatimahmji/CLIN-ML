@@ -19,9 +19,6 @@ The selected Logistic Regression model was evaluated on 340 eyes from 255 held-o
 
 Sensitivity, specificity and F1 use a probability threshold of 0.50. AUROC is not accuracy. These are results from the saved reference run; the test set has since been inspected during project development and is not a fresh external validation set.
 
-![Evaluation charts](evaluation.png)
-
-See [performance_report.md](performance_report.md) for uncertainty, calibration, comparisons and limitations, and [model_card.md](model_card.md) for intended use.
 
 ## Setup
 
