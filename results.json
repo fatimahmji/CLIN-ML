@@ -1,0 +1,237 @@
+{
+  "source_sha256": "28e092c643e439bd37f0c5f9ea0f6c6c73d8c88c3561b73d3bfe7c6f6535a01f",
+  "visits": 40281,
+  "patients": 1964,
+  "eyes": 2614,
+  "raw_missing_rates": {
+    "Unnamed: 0": 0.0,
+    "eye": 0.0,
+    "gender": 0.0,
+    "ethnicity": 0.0,
+    "baseline_va": 0.0,
+    "va": 0.0,
+    "follow_up_days": 0.0,
+    "inj_num": 0.0,
+    "inj_given": 0.0,
+    "baseline_age": 0.0,
+    "anon_id": 0.0
+  },
+  "out_of_range_va_records": 18,
+  "exclusions": {
+    "eligible": 1675,
+    "no_valid_window_va": 933,
+    "invalid_or_inconsistent_baseline_va": 6
+  },
+  "partitions": {
+    "train": {
+      "eyes": 997,
+      "patients": 763,
+      "responders": 533,
+      "prevalence": 0.5346038114343029
+    },
+    "validation": {
+      "eyes": 338,
+      "patients": 255,
+      "responders": 171,
+      "prevalence": 0.5059171597633136
+    },
+    "test": {
+      "eyes": 340,
+      "patients": 255,
+      "responders": 189,
+      "prevalence": 0.5558823529411765
+    }
+  },
+  "selected_model": "logistic_regression",
+  "baseline_missing_rates": {
+    "baseline_va": 0.0,
+    "baseline_age": 0.0
+  },
+  "versions": {
+    "python": "3.11.5",
+    "sklearn": "1.9.1",
+    "pandas": "3.0.6",
+    "numpy": "2.4.6"
+  },
+  "models": {
+    "logistic_regression": {
+      "grouped_training_cv_auroc": [
+        0.6353616416091019,
+        0.6609352809900587,
+        0.6017954960438223,
+        0.6861621947542961,
+        0.6835996382273138
+      ],
+      "train": {
+        "auroc": 0.669029404153458,
+        "auprc": 0.6765822527929063,
+        "sensitivity": 0.6529080675422139,
+        "specificity": 0.5948275862068966,
+        "f1": 0.6510757717492984,
+        "brier": 0.22802734711224643,
+        "confusion_matrix": [
+          [
+            276,
+            188
+          ],
+          [
+            185,
+            348
+          ]
+        ]
+      },
+      "validation": {
+        "auroc": 0.6796932450887697,
+        "auprc": 0.6647320951545279,
+        "sensitivity": 0.7134502923976608,
+        "specificity": 0.5149700598802395,
+        "f1": 0.6524064171122995,
+        "brier": 0.228542853616495,
+        "confusion_matrix": [
+          [
+            86,
+            81
+          ],
+          [
+            49,
+            122
+          ]
+        ]
+      },
+      "test": {
+        "auroc": 0.6920179403623112,
+        "auprc": 0.7004200930659283,
+        "sensitivity": 0.6878306878306878,
+        "specificity": 0.6026490066225165,
+        "f1": 0.6860158311345647,
+        "brier": 0.22307942301257552,
+        "confusion_matrix": [
+          [
+            91,
+            60
+          ],
+          [
+            59,
+            130
+          ]
+        ]
+      },
+      "test_cluster_bootstrap_95ci": {
+        "auroc": [
+          0.6321717610777345,
+          0.7474923624424432
+        ],
+        "auprc": [
+          0.6277054724459719,
+          0.7717901654496471
+        ],
+        "sensitivity": [
+          0.6141280511060259,
+          0.7539288014110928
+        ],
+        "specificity": [
+          0.5223856830497196,
+          0.6863994439295643
+        ],
+        "f1": [
+          0.6290246087944751,
+          0.7368553960659223
+        ],
+        "brier": [
+          0.21101840212513387,
+          0.236982035744201
+        ]
+      }
+    },
+    "random_forest": {
+      "grouped_training_cv_auroc": [
+        0.6572531491263713,
+        0.6576891864475553,
+        0.6053966321769121,
+        0.6718420259270425,
+        0.7069138780022108
+      ],
+      "train": {
+        "auroc": 0.6987631008604516,
+        "auprc": 0.7260054575276887,
+        "sensitivity": 0.7936210131332082,
+        "specificity": 0.46551724137931033,
+        "f1": 0.7026578073089701,
+        "brier": 0.22144973971882972,
+        "confusion_matrix": [
+          [
+            216,
+            248
+          ],
+          [
+            110,
+            423
+          ]
+        ]
+      },
+      "validation": {
+        "auroc": 0.6747382428126203,
+        "auprc": 0.651760781269735,
+        "sensitivity": 0.8070175438596491,
+        "specificity": 0.4251497005988024,
+        "f1": 0.6814814814814815,
+        "brier": 0.22971735749392946,
+        "confusion_matrix": [
+          [
+            71,
+            96
+          ],
+          [
+            33,
+            138
+          ]
+        ]
+      }
+    },
+    "gradient_boosting": {
+      "grouped_training_cv_auroc": [
+        0.663551401869159,
+        0.662913369851897,
+        0.6240616757963074,
+        0.6777710782835897,
+        0.6831474223696111
+      ],
+      "train": {
+        "auroc": 0.6908763019990943,
+        "auprc": 0.6993652797709933,
+        "sensitivity": 0.7654784240150094,
+        "specificity": 0.4978448275862069,
+        "f1": 0.6950596252129472,
+        "brier": 0.21975238179392748,
+        "confusion_matrix": [
+          [
+            231,
+            233
+          ],
+          [
+            125,
+            408
+          ]
+        ]
+      },
+      "validation": {
+        "auroc": 0.6665265959309451,
+        "auprc": 0.6432050230549538,
+        "sensitivity": 0.783625730994152,
+        "specificity": 0.4491017964071856,
+        "f1": 0.6750629722921915,
+        "brier": 0.22699793044509053,
+        "confusion_matrix": [
+          [
+            75,
+            92
+          ],
+          [
+            37,
+            134
+          ]
+        ]
+      }
+    }
+  }
+}

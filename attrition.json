@@ -1,0 +1,8 @@
+{
+  "eye_counts": {
+    "included": 1675,
+    "excluded": 939
+  },
+  "baseline_va_standardized_mean_difference_included_minus_excluded": 0.034979686318559876,
+  "notes": "Descriptive eye-level comparison. Patients can contribute eyes to both inclusion categories. Missing baseline VA excluded from numeric summaries, not replaced. Associations do not quantify or correct selection bias."
+}
