@@ -19,6 +19,9 @@ The selected Logistic Regression model was evaluated on 340 eyes from 255 held-o
 
 Sensitivity, specificity and F1 use a probability threshold of 0.50. AUROC is not accuracy. These are results from the saved reference run; the test set has since been inspected during project development and is not a fresh external validation set.
 
+![Evaluation charts](reports/evaluation.png)
+
+See [performance_report.md](reports/performance_report.md) for uncertainty, calibration, comparisons and limitations, and [model_card.md](reports/model_card.md) for intended use.
 
 ## Setup
 
@@ -28,7 +31,7 @@ Use Python 3.11. From this folder:
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
-python -m unittest test_labels.py
+python -m unittest discover -s development -p "test_labels.py"
 ```
 
 ## Use the saved model
@@ -44,10 +47,12 @@ The return value is a probability between 0 and 1. See [schema.json](schema.json
 
 ## Reproduce training and checks
 
-The raw CSV and patient-level reference tables are deliberately stored separately from this repository. Obtain the original `200319_DMO_report1_anonymised.csv` from the [Dryad dataset](https://datadryad.org/dataset/doi:10.5061/dryad.pzgmsbcfw). The exact source checksum is recorded in `results.json`.
+The raw CSV and patient-level reference tables are deliberately stored separately from this repository. Obtain the original `200319_DMO_report1_anonymised.csv` from the team's research storage or the [Dryad dataset](https://datadryad.org/dataset/doi:10.5061/dryad.pzgmsbcfw). The exact source checksum is recorded in `development/results.json`.
+
+For the complete reference-parity workflow, also obtain the separate `CLIN-ML_reference_private.zip` from the project owner through team research storage. Extract it locally; it contains `reference/eye_level_dataset.csv` and `reference/heldout_predictions.csv` from the frozen reference run. Do not upload that archive to this repository.
 
 ```bash
-python run_release.py \
+python development/run_release.py \
   --input "/path/to/200319_DMO_report1_anonymised.csv" \
   --reference "/path/to/reference" \
   --output generated
@@ -55,12 +60,12 @@ python run_release.py \
 
 This runs label tests, regenerates eye-level labels, trains Logistic Regression, Random Forest and Gradient Boosting, produces audits and charts, verifies labels/partitions/predictions against the frozen reference, and writes the report. `generated/` is ignored by Git so rerunning does not overwrite the committed reference results. Missing reference files cause an early error.
 
-To train without frozen-reference comparison, call the training function directly, then generate audits and the report:
+To train without frozen-reference comparison, run this Python code from the repository root:
 
 ```python
 from training import main
-from audits import run_audits
-from make_report import make_report
+from development.audits import run_audits
+from development.make_report import make_report
 
 source = "/path/to/200319_DMO_report1_anonymised.csv"
 main(source, "generated")
@@ -68,28 +73,18 @@ run_audits(source, "generated")
 make_report("generated")
 ```
 
-This alternative does not perform frozen-reference parity checks.
+This alternative regenerates results but does not perform frozen-reference parity checks.
 
-## Source files
+## Files
 
-| File | Purpose |
-|---|---|
-| `data_preparation.py` | Visit cleaning, baseline/follow-up selection and response labels |
-| `training.py` | Patient splits, preprocessing, three models and evaluation charts |
-| `evaluation.py` | Metric calculations |
-| `inference.py` | Baseline input validation and response probability |
-| `audits.py` | Data quality, attrition, calibration and acuity-only comparison |
-| `test_labels.py` | Synthetic tests of labeling and calibration rules |
-| `verify.py` | Source follow-up, reference parity and model reload checks |
-| `run_release.py` | Complete reproducible workflow |
-| `make_report.py` | Report generation from computed outputs |
+The main source files, saved model and input schema are at the top level. `reports/` contains the performance report, model card and charts. `development/` contains tests, audits, reproduction utilities and aggregate evidence from the original run.
 
-[STEP_BY_STEP.md](STEP_BY_STEP.md) explains the code. 
+For a code walkthrough, read [development/STEP_BY_STEP.md](development/STEP_BY_STEP.md). Additional source details are in [development/SOURCE_AND_PROTOCOL.md](development/SOURCE_AND_PROTOCOL.md). The recorded verification results describe the original run, not a new dataset.
 
 ## Outcome and scope
 
-Data source and cleaning: The dataset contains routine-care Moorfields DME records, with visual acuity recorded in ETDRS letters and follow-up days measured from the first recorded injection. Each eligible eye requires a unique day-zero injection visit and valid baseline measurements. Invalid VA scores outside 0–100 are treated as missing. Conflicting measurements on the selected follow-up day lead to exclusion. The first recorded injection does not confirm that the patient had never received treatment elsewhere, and routine VA should not be described as standardized BCVA.
-
 Follow-up is the valid VA measurement nearest day 180 within days 150–210, with earlier-day tie breaking. Response means follow-up VA minus baseline VA is at least 5 letters. Eyes without eligible follow-up remain unlabeled. Features contain no follow-up measurements or future injection counts.
 
+The source cohort was restricted to eyes receiving at least three injections, which limits generalization to all treatment starters. Clinical signoff on the proposed endpoint remains pending. The CSV contains no OCT thickness measurement, so an anatomical response model is not implemented. Multimodal comparisons require verified linkage and evaluation on the same patients.
 
+Data source details: VA is recorded in ETDRS letters, and follow-up days start at the first recorded injection. Eligible eyes require a unique day-zero injection visit and valid baseline measurements. Scores outside 0–100 are treated as missing; conflicting measurements on the selected follow-up day lead to exclusion. First recorded injection does not establish treatment-naive status. Routine VA is not necessarily standardized BCVA.
