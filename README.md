@@ -44,9 +44,7 @@ The return value is a probability between 0 and 1. See [schema.json](schema.json
 
 ## Reproduce training and checks
 
-The raw CSV and patient-level reference tables are deliberately stored separately from this repository. Obtain the original `200319_DMO_report1_anonymised.csv` from the team's research storage or the [Dryad dataset](https://datadryad.org/dataset/doi:10.5061/dryad.pzgmsbcfw). The exact source checksum is recorded in `results.json`.
-
-For the complete reference-parity workflow, also obtain the separate `CLIN-ML_reference_private.zip` from the project owner through team research storage. Extract it locally; it contains `reference/eye_level_dataset.csv` and `reference/heldout_predictions.csv` from the frozen reference run. Do not upload that archive to this repository.
+The raw CSV and patient-level reference tables are deliberately stored separately from this repository. Obtain the original `200319_DMO_report1_anonymised.csv` from the [Dryad dataset](https://datadryad.org/dataset/doi:10.5061/dryad.pzgmsbcfw). The exact source checksum is recorded in `results.json`.
 
 ```bash
 python run_release.py \
