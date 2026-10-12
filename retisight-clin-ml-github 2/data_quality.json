@@ -1,0 +1,25 @@
+{
+  "raw_blank_rates": {
+    "Unnamed: 0": 0.0,
+    "eye": 0.0,
+    "gender": 0.0,
+    "ethnicity": 0.0,
+    "baseline_va": 0.0,
+    "va": 0.0,
+    "follow_up_days": 0.0,
+    "inj_num": 0.0,
+    "inj_given": 0.0,
+    "baseline_age": 0.0,
+    "anon_id": 0.0
+  },
+  "invalid_va_records": 18,
+  "invalid_baseline_va_records": 114,
+  "post_cleaning_missing_rates": {
+    "va": 0.00044686080285990913,
+    "baseline_va": 0.002830118418112758
+  },
+  "unknown_ethnicity_visit_records": 4167,
+  "visit_rows": 40281,
+  "duplicate_visit_content_rows": 0,
+  "source_cohort_restriction": "Original authors excluded eyes receiving fewer than three injections; post-baseline selection limits application to all initiators."
+}

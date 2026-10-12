@@ -1,0 +1,31 @@
+{
+  "version": "0.1.1-research",
+  "features": {
+    "baseline_va": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "unit": "ETDRS letters"
+    },
+    "baseline_age": {
+      "type": "string",
+      "enum": [
+        "[20,30]",
+        "(30,40]",
+        "(40,50]",
+        "(50,60]",
+        "(60,70]",
+        "(70,80]",
+        "(80,100]"
+      ]
+    }
+  },
+  "outcome": "gain >=5 letters; nearest valid day to 180 within inclusive 150\u2013210; ties earlier day",
+  "clinical_signoff": false,
+  "source_units_verified": true,
+  "baseline_definition": "Dataset injection number 1; prior treatment elsewhere unconfirmed",
+  "population_restriction": "Source cohort required at least three injections, then valid outcome follow-up",
+  "deployment_approved": false,
+  "selected_model": "logistic_regression",
+  "threshold": 0.5
+}
